@@ -35,11 +35,9 @@ public class DataSaver : MonoBehaviour
             FileStream stream = new FileStream(path, FileMode.Open);
 
             Data data = formatter.Deserialize(stream) as Data;
-
             string[] decodedStr = FormDecodedArray(data.str);
             List<string>[] decodedList = FormDecodedList(data.lists);
             Dictionary<string, string>[] decodedDict = FormDecodedDict(data.dictionaries);
-
             Data decodedData = new Data(decodedStr, decodedList, decodedDict);
             stream.Close();
 
