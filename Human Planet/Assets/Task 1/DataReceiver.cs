@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class DataReceiver : MonoBehaviour
 {
-    private string[] strs;
-    // Start is called before the first frame update
     void Start()
     {
         string[] strs = { "Hi", "Hello", "Good Morning", "Bye" };
         List<string>[] strings = { new List<string>() {"Pop", "Vokod" } };
-        Dictionary<string, string>[] numbers = new Dictionary<string, string>[] { new Dictionary<string, string> { { "0", "2" }, { "5", "6" } } };
+        Dictionary<string, string>[] numbers = new Dictionary<string, string>[]
+        {
+            new Dictionary<string, string> { { "0", "2" }, { "5", "6" } },
+            new Dictionary<string, string> { { "Privet", "Poka" }, { "Key", "Value" } }
+        };
         DataSaver.Save(strs, strings, numbers);
         Debug.Log("Saved");
     }
@@ -22,11 +24,13 @@ public class DataReceiver : MonoBehaviour
             Data data = DataSaver.Load();
             if (data != null)
             {
-                //foreach (var str in data.str)
-                //{
-                //    Debug.Log(str);
-                //}
+                Debug.Log("--------------- String ----------------");
+                foreach (var str in data.str)
+                {
+                    Debug.Log(str);
+                }
 
+                Debug.Log("--------------- List ----------------");
                 foreach (var list in data.lists)
                 {
                     foreach (var element in list)
@@ -36,15 +40,15 @@ public class DataReceiver : MonoBehaviour
 
                 }
 
-                //foreach (var dict in data.dictionaries)
-                //{
-                //    foreach (KeyValuePair<string, string> kvp in dict)
-                //    {
-                //        Debug.Log(kvp.Key);
-                //        Debug.Log(kvp.Value);
-                //    }
-
-                //}
+                Debug.Log("--------------- Dictionary ----------------");
+                foreach (var dict in data.dictionaries)
+                {
+                    foreach (KeyValuePair<string, string> kvp in dict)
+                    {
+                        Debug.Log(kvp.Key);
+                        Debug.Log(kvp.Value);
+                    }
+                }
             }
         }
     }
